@@ -64,6 +64,9 @@ add_subdirectory(Engine ${CMAKE_CURRENT_BINARY_DIR}/engine/)
 include_directories(.)
 
 set(SOURCE_FILES main.cpp
+				 LD31.cpp
+				 LevelScene.cpp
+				 Snowman.cpp
 )
 add_executable(LD31 ${SOURCE_FILES})
 

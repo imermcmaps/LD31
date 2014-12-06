@@ -1,0 +1,23 @@
+{
+	"type":"sprite",
+	"origin": "center",
+	"size": [80,85],
+	"sprite": {
+		"sheet": "assets/script/sheet_snowman.json",
+		"index": 2,
+		"animations":{
+			"default":{
+				"frames":[2],
+				"loop":true
+			}
+		}
+	},
+	"body" : {
+		"allowSleep":false,
+		"density": 30,
+		"shapes":[
+			{"type":"circle", "x":-5, "y":0,"radius":30},
+			{"type":"circle", "x":5, "y":0,"radius":30}
+		]
+	}
+}

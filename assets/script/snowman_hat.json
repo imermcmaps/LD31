@@ -1,0 +1,22 @@
+{
+	"type":"sprite",
+	"origin": "center",
+	"size": [50,35],
+	"sprite": {
+		"sheet": "assets/script/sheet_snowman.json",
+		"animations":{
+			"default":{
+				"frames":[0],
+				"loop":true
+			}
+		}
+	},
+	"body" : {
+		"allowSleep":false,
+		"density": 0.5,
+		"type": "dynamic",
+		"shapes":[
+			{"type":"box", "width": 50, "height": 35, "origin":[25, 17.5]}
+		]
+	}
+}
