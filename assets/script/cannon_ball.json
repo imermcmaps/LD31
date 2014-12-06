@@ -1,0 +1,17 @@
+{
+	"type": "projectile",
+	"size": [15, 15],
+	"origin": "center",
+	"sprite": {
+		"sheet": "assets/script/sheet_projectiles.json"
+	},
+	"body" : {
+		"allowSleep":false,
+		"bullet": true,
+		"density": 500,
+		"linearVelocity": [750, 0],
+		"shapes":[
+			{"type":"circle", "x":0, "y":0, "radius":7.5}
+		]
+	}
+}

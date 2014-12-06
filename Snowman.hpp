@@ -9,14 +9,37 @@
 #define	SNOWMAN_HPP
 #include "engine/src/SpriteNode.hpp"
 #include "Constants.hpp"
+#include "engine/src/util/Event.hpp"
 
 class Snowman : public engine::Node {
-protected:
+public:
 
-    engine::SpriteNode* m_hat;
-    engine::SpriteNode* m_head;
-    engine::SpriteNode* m_middle;
-    engine::SpriteNode* m_bottom;
+    class BodyPart : public engine::SpriteNode {
+    protected:
+        float m_health;
+        bool m_dead;
+        float m_deathCounter;
+    public:
+        BodyPart(engine::Scene* scene);
+        void Damage(float impact);
+        virtual void OnUpdate(sf::Time interval);
+
+    };
+
+    class ContactHandler : public engine::util::EventHandler<b2Contact*, const b2ContactImpulse*> {
+    protected:
+        Snowman* m_snowman;
+    public:
+        ContactHandler(Snowman* snowman);
+        virtual void handle(b2Contact* contact, const b2ContactImpulse* impulse);
+    };
+protected:
+    friend ContactHandler;
+    BodyPart* m_hat;
+    BodyPart* m_head;
+    BodyPart* m_middle;
+    BodyPart* m_bottom;
+    ContactHandler m_contactHandler;
 public:
     static engine::Node* manufacture(Json::Value& root, engine::Node* parent);
 
@@ -26,8 +49,8 @@ protected:
     void Initialize(float x, float y);
     virtual void OnRemoveNode(Node* node);
     bool m_initialized;
-    
-    virtual uint8_t GetType() const{
+
+    virtual uint8_t GetType() const {
         return NT_SNOWMAN;
     }
 

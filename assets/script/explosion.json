@@ -1,0 +1,31 @@
+{
+	"type": "sprite",
+	"size": [60, 50],
+	"origin":"bottom-center",
+	"sprite": {
+		"sheet":{
+			"texture": "assets/images/explosion.png",
+			"sprites": [
+				{"top":0, "left": 0, "width": 59, "height":50},
+				{"top":0, "left": 59, "width": 59, "height":50},
+				{"top":0, "left": 118, "width": 59, "height":50},
+				{"top":0, "left": 177, "width": 59, "height":50},
+				{"top":0, "left": 236, "width": 59, "height":50},
+				{"top":0, "left": 295, "width": 59, "height":50},
+				{"top":0, "left": 354, "width": 59, "height":50},
+				{"top":0, "left": 413, "width": 59, "height":50},
+				{"top":0, "left": 472, "width": 59, "height":50},
+				{"top":0, "left": 531, "width": 59, "height":50},
+				{"top":0, "left": 590, "width": 59, "height":50}
+			]
+		},
+		"animations": {
+			"default": {
+				"frames": [0,1,2,3,4,5,6,7,8,9,10],
+				"speed": 0.05,
+				"loop": false
+			}
+		} 
+	}
+	
+}

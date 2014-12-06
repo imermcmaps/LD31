@@ -1,5 +1,5 @@
 {
-	"type":"sprite",
+	"type":"snowmanPart",
 	"origin": "center",
 	"size": [30, 24], // [10, 7]
 	"sprite": {
