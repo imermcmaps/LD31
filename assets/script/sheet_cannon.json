@@ -1,0 +1,10 @@
+{
+	"texture": "assets/images/cannon.png",
+	"sprites":[
+		{"left":0, "top":30, "width": 9, "height": 9},
+		{"left":0, "top":0, "width": 11, "height": 30},
+		{"left":11, "top":0, "width": 11, "height": 30},
+		{"left":22, "top":0, "width": 11, "height": 30},
+		{"left":33, "top":0, "width": 11, "height": 30}
+	]
+}

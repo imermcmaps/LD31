@@ -67,6 +67,8 @@ set(SOURCE_FILES main.cpp
 				 LD31.cpp
 				 LevelScene.cpp
 				 Snowman.cpp
+				 Cannon.cpp
+				 Projectile.cpp
 )
 add_executable(LD31 ${SOURCE_FILES})
 

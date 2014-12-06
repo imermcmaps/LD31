@@ -10,7 +10,11 @@
 	"children": [
 		{
 			"type":"snowman",
-			"position":[500,500]
+			"position":[500,576]
+		},
+		{
+			"childData":"assets/script/cannon.json",
+			"position":[20,572]
 		},
 		{
 			"position": [0,0],
