@@ -13,7 +13,7 @@ class Snowman: public engine::Node {
 public:
     static engine::Node* manufacture(Json::Value& root, engine::Node* parent) ;
     
-    Snowman(engine::Scene* scene);
+    explicit Snowman(engine::Scene* scene);
     virtual ~Snowman();
 private:
     void Initialize(float x, float y);

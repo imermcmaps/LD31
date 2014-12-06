@@ -1,7 +1,7 @@
 {
 	"type":"sprite",
 	"origin": "center",
-	"size": [50,35],
+	"size": [30, 24], // [10, 7]
 	"sprite": {
 		"sheet": "assets/script/sheet_snowman.json",
 		"animations":{
@@ -16,7 +16,7 @@
 		"density": 0.5,
 		"type": "dynamic",
 		"shapes":[
-			{"type":"box", "width": 50, "height": 35, "origin":[25, 17.5]}
+			{"type":"box", "width": 25, "height": 20}
 		]
 	}
 }

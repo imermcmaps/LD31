@@ -1,7 +1,7 @@
 {
 	"type":"sprite",
 	"origin": "center",
-	"size": [80,85],
+	"size": [48,51], // [16, 17]
 	"sprite": {
 		"sheet": "assets/script/sheet_snowman.json",
 		"index": 2,
@@ -16,8 +16,8 @@
 		"allowSleep":false,
 		"density": 30,
 		"shapes":[
-			{"type":"circle", "x":-5, "y":0,"radius":30},
-			{"type":"circle", "x":5, "y":0,"radius":30}
+			{"type":"circle", "x":-2, "y":0, "radius":21},
+			{"type":"circle", "x":2, "y":0, "radius":21}
 		]
 	}
 }

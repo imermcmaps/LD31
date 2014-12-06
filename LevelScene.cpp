@@ -17,6 +17,7 @@ LevelScene::~LevelScene() {
 }
 
 void LevelScene::OnUpdate(sf::Time interval){
+	engine::Scene::OnUpdate(interval);
 	//std::cout << m_game->GetMousePosition().x << "," << m_game->GetMousePosition().y  << std::endl;
 }
 

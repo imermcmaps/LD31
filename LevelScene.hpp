@@ -13,9 +13,9 @@
 class LD31;
 class LevelScene: public engine::Scene{
 public:
-    LevelScene(LD31* game);
+    explicit LevelScene(LD31* game);
     virtual ~LevelScene();
-    virtual void OnUpdate(sf::Time interval);
+    
     virtual uint8_t GetType() const;
 
     void SetSnowman(Snowman* snowman) {
@@ -25,7 +25,8 @@ public:
     Snowman* GetSnowman() const {
         return m_snowman;
     }
-
+protected:
+    virtual void OnUpdate(sf::Time interval);
 private:
     Snowman* m_snowman;
 };
