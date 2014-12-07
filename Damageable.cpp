@@ -1,5 +1,6 @@
 #include "Damageable.hpp"
 #include <Scene.hpp>
+#include <iostream>
 Damageable::ContactHandler::ContactHandler(Damageable* damageable) : m_damageable(damageable) {
 
 }
@@ -22,7 +23,9 @@ void Damageable::ContactHandler::handle(b2Contact* contact, const b2ContactImpul
 		for (uint32_t i = 0; i < impulse->count; i++) {
 			force += impulse->normalImpulses[i];
 		}
-		if (abs(force) > 0.2) {
+		force /= damageable->GetBody()->GetMass();
+		if (abs(force) > 0.4) {
+			std::cout << force << std::endl;
 			b2WorldManifold worldManifold;
 			contact->GetWorldManifold(&worldManifold);
 			damageable->Damage(abs(force), other, worldManifold);
