@@ -21,7 +21,6 @@
 		
 	},
 	"body": {
-		"linearVelocity": [100,100],
 		"shapes": [
 			{
 				"type":"box", "x": 3, "y":3, "density": 1,

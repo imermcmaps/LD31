@@ -3,7 +3,33 @@
 	"size": [50, 50],
 	"origin":"center",
 	"sprite": {
-		"texture": "assets/images/slot.png"
+		"sheet":{
+			"texture": "assets/images/slot.png",
+			"sprites": [
+				{"left":0, "top":0, "width":20, "height":20},
+				{"left":20, "top":0, "width":20, "height":20},
+				{"left":40, "top":0, "width":20, "height":20},
+				{"left":60, "top":0, "width":20, "height":20}
+			]
+		},
+		"animations": {
+			"default": {
+				"frames": [1],
+				"loop": true
+			},
+			"selected": {
+				"frames": [0],
+				"loop": true
+			},
+			"empty": {
+				"frames": [3],
+				"loop": true
+			},
+			"selected_empty": {
+				"frames": [2],
+				"loop": true
+			}
+		}
 	},
 	"children": [
 		{

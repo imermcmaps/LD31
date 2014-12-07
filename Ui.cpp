@@ -11,35 +11,16 @@
 #include "Factory.hpp"
 #include "Cannon.hpp"
 #include "Text.hpp"
+#include "LevelScene.hpp"
 
-Ui::Slot::FireHandler::FireHandler(Slot* slot): m_slot(slot) {
-
-}
-
-Ui::Slot::FireHandler::~FireHandler() {
-
-}
-
-void Ui::Slot::FireHandler::handle(Cannon* cannon) {
-	if (m_slot->IsSelected()){
-		m_slot->SetCount(m_slot->GetCount()-1);
-		if (m_slot->GetCount() > 0){
-			cannon->SetLoaded(true);
-		} 
-	}
-}
-
-Ui::Slot::Slot(engine::Scene* scene) : SpriteNode(scene), m_icon(nullptr), m_count(0) {
-	if (scene->GetType() != NT_LEVELSCENE) {
-		std::cerr << "Ui Scene type isnt level. Stuff will not work properly" << std::endl;
-	}
+Ui::Slot::Slot(engine::Scene* scene) : SpriteNode(scene), m_selected(false), m_icon(nullptr), m_count(0){
 }
 
 Ui::Slot::~Slot() {
 
 }
 
-Ui::Ui(engine::Scene* scene) : Node(scene), m_currentSlot(0) {
+Ui::Ui(engine::Scene* scene) : Node(scene), m_currentSlot(0), m_score(nullptr), m_next(nullptr)  {
 	if (scene->GetType() != NT_LEVELSCENE) {
 		std::cerr << "Ui Scene type isnt level. Stuff will not work properly" << std::endl;
 	}
@@ -73,8 +54,68 @@ bool Ui::initialize(Json::Value& root) {
 				static_cast<engine::Text*> (text)->SetText(ss.str());
 			}
 			m_slots.insert(std::make_pair(i, s));
+			if (i == m_currentSlot) {
+			}
+			s->UpdateAnimation();
 		}
 	}
+	auto& score = root["score"];
+	if (score.isObject()){
+		m_score = static_cast<engine::Text*>(engine::Factory::CreateChild(score, this));
+		AddNode(m_score);
+	}
+	auto& next = root["next"];
+	if (next.isObject()){
+		m_next = static_cast<engine::Button*>(engine::Factory::CreateChild(next, this));
+		AddNode(m_next);
+		m_next->OnClick = [this](engine::Button*, sf::Vector2f){
+			static_cast<LevelScene*>(m_scene)->Next();
+		};
+	}
+	m_init=true;
 	return true;
 }
 
+Ui::Slot* Ui::GetCurrentSlot() {
+	return m_slots[m_currentSlot];
+}
+
+void Ui::OnUpdate(sf::Time interval) {
+#define P sf::Keyboard::isKeyPressed
+	bool m_updateSelect = false;
+	if (m_currentSlot != 0 && m_slots.size() > 0 && P(sf::Keyboard::Num1)) {
+		GetCurrentSlot()->SetSelected(false);
+		m_currentSlot = 0;
+		m_updateSelect = true;
+	} else if (m_currentSlot != 1 && m_slots.size() > 1 && P(sf::Keyboard::Num2)) {
+		GetCurrentSlot()->SetSelected(false);
+		m_currentSlot = 1;
+		m_updateSelect = true;
+	} else if (m_currentSlot != 2 && m_slots.size() > 2 && P(sf::Keyboard::Num3)) {
+		GetCurrentSlot()->SetSelected(false);
+		m_currentSlot = 2;
+		m_updateSelect = true;
+	}
+	if (m_updateSelect) {
+		Select();
+		m_updateSelect=false;
+	}
+	if (m_init){
+		Select();
+		static_cast<LevelScene*>(m_scene)->AddScore(0);
+		m_init=false;
+	}
+#undef P
+}
+void Ui::Select(){
+	auto s = GetCurrentSlot();
+	s->SetSelected(true);
+	if (m_scene->GetType() == NT_LEVELSCENE) {
+		static_cast<LevelScene*> (m_scene)->GetCannon()->SetCannonBall(s->GetProjectile());
+		if (s->GetCount() > 0) {
+			static_cast<LevelScene*> (m_scene)->GetCannon()->SetLoaded(true);
+		} else {
+			static_cast<LevelScene*> (m_scene)->GetCannon()->SetLoaded(false);
+		}
+	}
+}

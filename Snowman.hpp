@@ -7,9 +7,9 @@
 
 #ifndef SNOWMAN_HPP
 #define	SNOWMAN_HPP
-#include "engine/src/SpriteNode.hpp"
+#include <SpriteNode.hpp>
 #include "Constants.hpp"
-#include "engine/src/util/Event.hpp"
+#include <util/Event.hpp>
 
 class Snowman : public engine::Node {
 public:

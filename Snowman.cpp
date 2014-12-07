@@ -49,7 +49,7 @@ void Snowman::BodyPart::OnUpdate(sf::Time interval) {
 		const ParticleDef& p = m_particles.back();
 		engine::SpriteNode* particle = static_cast<engine::SpriteNode*> (engine::Factory::CreateChildFromFile("assets/script/snow_particle.json", GetScene()));
 		particle->GetBody()->SetTransform(p.point, 0);
-		auto rand = engine::util::RandomFloat(-0.05, 0.05);
+		auto rand = engine::util::RandomFloat(-0.01, 0.01);
 		particle->GetBody()->ApplyForceToCenter(b2Vec2(rand(), rand()) , true);
 		particle->GetAnimation()->OnOver = [particle]() {
 			particle->Delete();
@@ -102,7 +102,6 @@ engine::Node* Snowman::manufacture(Json::Value& root, engine::Node* parent) {
 	}
 	if (parent->GetType() == NT_LEVELSCENE) {
 		LevelScene* level = static_cast<LevelScene*> (parent);
-		level->SetSnowman(s);
 	} else {
 		std::cerr << "Creating snowman with non-levelscene as a parent. Stuff might not work correctly." << std::endl;
 	}
@@ -145,11 +144,11 @@ void Snowman::OnRemoveNode(Node* node) {
 		m_middle = nullptr;
 	if (node == m_bottom)
 		m_bottom = nullptr;
+	if (m_scene->GetType() == NT_LEVELSCENE) {
+		static_cast<LevelScene*>(m_scene)->AddScore(10);
+	}
 
 	if (!m_hat && !m_head && !m_middle && !m_bottom) {
-		if (m_scene->GetType() == NT_LEVELSCENE) {
-			static_cast<LevelScene*> (m_scene)->SetSnowman(nullptr);
-		}
 		Delete();
 	}
 }

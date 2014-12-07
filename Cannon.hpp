@@ -12,12 +12,12 @@
 #include <SFML/Window.hpp>
 class Cannon : public engine::SpriteNode {
 
-    class MouseHandler : public engine::util::EventHandler<const sf::Event::MouseButtonEvent&> {
+    class KeyHandler : public engine::util::EventHandler<const sf::Event::KeyEvent&> {
     protected:
         Cannon* m_cannon;
     public:
-        MouseHandler(Cannon* cannon);
-        virtual void handle(const sf::Event::MouseButtonEvent&);
+        KeyHandler(Cannon* cannon);
+        virtual void handle(const sf::Event::KeyEvent&);
     };
 protected:
     
@@ -25,7 +25,7 @@ protected:
     std::string m_cannonBall;
     uint32_t m_cannonBallCount;
     float m_shootCooldown;
-    MouseHandler m_mouseHandler;
+    KeyHandler m_keyHandler;
     
 public:
     explicit Cannon(engine::Scene* scene);
@@ -41,7 +41,14 @@ public:
     void SetLoaded(bool loaded) {
         m_loaded = loaded;
     }
-    engine::util::Event<Cannon*> OnFire;
+
+    void SetCannonBall(std::string cannonBall) {
+        m_cannonBall = cannonBall;
+    }
+
+    std::string GetCannonBall() const {
+        return m_cannonBall;
+    }
 protected:
     virtual void OnUpdate(sf::Time interval);
 

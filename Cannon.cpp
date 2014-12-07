@@ -13,23 +13,32 @@
 #include "Factory.hpp"
 #include <iostream>
 #include "Projectile.hpp"
-
-Cannon::MouseHandler::MouseHandler(Cannon* cannon) : m_cannon(cannon) {
+#include "Ui.hpp"
+#include "Constants.hpp"
+#include "LevelScene.hpp"
+Cannon::KeyHandler::KeyHandler(Cannon* cannon) : m_cannon(cannon) {
 
 }
 
-void Cannon::MouseHandler::handle(const sf::Event::MouseButtonEvent& e) {
-	if (e.button == sf::Mouse::Left && m_cannon->IsLoaded()) {
+void Cannon::KeyHandler::handle(const sf::Event::KeyEvent& e) {
+	if (e.code == sf::Keyboard::Space && m_cannon->IsLoaded()) {
 		m_cannon->Fire();
 	}
 }
 
-Cannon::Cannon(engine::Scene* scene) : SpriteNode(scene), m_mouseHandler(this) {
-	scene->GetGame()->OnMouseClick.AddHandler(&m_mouseHandler);
+Cannon::Cannon(engine::Scene* scene) : SpriteNode(scene), m_keyHandler(this) {
+	scene->GetGame()->OnKeyDown.AddHandler(&m_keyHandler);
+	if (scene->GetType() == NT_LEVELSCENE){
+		static_cast<LevelScene*>(m_scene)->SetCannon(this);
+	}
 }
 
 Cannon::~Cannon() {
-	m_scene->GetGame()->OnMouseClick.RemoveHandler(&m_mouseHandler);
+	m_scene->GetGame()->OnKeyDown.RemoveHandler(&m_keyHandler);
+	if (m_scene->GetType() == NT_LEVELSCENE){
+		auto s=static_cast<LevelScene*>(m_scene);
+		if (s->GetCannon() == this) s->SetCannon(nullptr);
+	}
 }
 
 void Cannon::Fire() {
@@ -45,8 +54,12 @@ void Cannon::Fire() {
 	}
 	p->GetBody()->SetTransform(b2Vec2(barrel->GetGlobalPosition().x/m_scene->GetPixelMeterRatio(), barrel->GetGlobalPosition().y/m_scene->GetPixelMeterRatio()), angle);
 	p->GetBody()->SetLinearVelocity(b2Vec2(p->GetBody()->GetLinearVelocity().x * cosf(angle), p->GetBody()->GetLinearVelocity().x * sinf(angle)));
-	m_loaded=false;
-	OnFire.Fire(this);
+	Ui* ui = static_cast<Ui*>(m_scene->GetUi());
+	Ui::Slot* s = ui->GetCurrentSlot();
+	s->SetCount(s->GetCount()-1);
+	if (s->GetCount() <= 0){
+		m_loaded=false;
+	}
 }
 
 void Cannon::OnUpdate(sf::Time interval) {
