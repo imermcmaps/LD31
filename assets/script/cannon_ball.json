@@ -6,7 +6,6 @@
 		"sheet": "assets/script/sheet_projectiles.json"
 	},
 	"body" : {
-		"allowSleep":false,
 		"bullet": true,
 		"linearVelocity": [750, 0],
 		"shapes":[

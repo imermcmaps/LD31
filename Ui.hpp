@@ -101,6 +101,10 @@ public:
     engine::Text* GetScore() const {
         return m_score;
     }
+
+    engine::Button* GetNext() const {
+        return m_next;
+    }
 protected:
     virtual void OnUpdate(sf::Time interval);
     void Select();

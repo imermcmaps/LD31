@@ -10,11 +10,35 @@
 
 #include <SpriteNode.hpp>
 
+class Projectile : public engine::SpriteNode {
+public:
 
-class Projectile: public engine::SpriteNode {
+    class ContactHandler : public engine::util::EventHandler<b2Contact*, bool> {
+    protected:
+        Projectile* m_projectile;
+    public:
+        ContactHandler(Projectile* snowman);
+        virtual void handle(b2Contact* contact, bool);
+    };
+protected:
+    bool m_doesExplode;
+    bool m_explode;
+    ContactHandler m_contactHandler;
 public:
     Projectile(engine::Scene* scene);
     virtual ~Projectile();
+    virtual bool initialize(Json::Value& root);
+
+    void SetExplode(bool explode) {
+        m_explode = explode;
+    }
+
+    bool IsExplode() const {
+        return m_doesExplode;
+    }
+    virtual void OnUpdate(sf::Time interval);
+
+
 protected:
 };
 

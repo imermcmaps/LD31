@@ -57,6 +57,7 @@ void Cannon::Fire() {
 	Ui* ui = static_cast<Ui*>(m_scene->GetUi());
 	Ui::Slot* s = ui->GetCurrentSlot();
 	s->SetCount(s->GetCount()-1);
+	static_cast<LevelScene*>(m_scene)->AddAmmo(-1);
 	if (s->GetCount() <= 0){
 		m_loaded=false;
 	}

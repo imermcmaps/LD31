@@ -23,7 +23,7 @@
 	"body": {
 		"shapes": [
 			{
-				"type":"box", "x": 3, "y":3, "density": 1,
+				"type":"box", "width": 3, "height":3, "density": 1,
 				"category": 2, // particle
 				"mask": 4 // projectile
 			}

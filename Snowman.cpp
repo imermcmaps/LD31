@@ -68,7 +68,9 @@ void Snowman::ContactHandler::handle(b2Contact* contact, const b2ContactImpulse*
 
 	Snowman::BodyPart* snowman = nullptr;
 	engine::Node* other = nullptr;
-	if (a && a->GetParent() == m_snowman && b->GetParent()->GetType() != NT_SNOWMAN) {
+	if (a && 
+			a->GetParent() == m_snowman &&
+			b->GetParent()->GetType() != NT_SNOWMAN) {
 		snowman = static_cast<Snowman::BodyPart*> (a);
 		other = b;
 	} else if (b && b->GetParent() == m_snowman && b->GetParent()->GetType() != NT_SNOWMAN) {
@@ -117,7 +119,6 @@ Snowman::~Snowman() {
 }
 
 void Snowman::Initialize(float x, float y) {
-	std::cout << "Init: " << x << ", " << y << std::endl;
 	if (m_initialized) {
 		std::cerr << "Warning: Initialized snowman multiple times" << std::endl;
 	}
@@ -133,6 +134,7 @@ void Snowman::Initialize(float x, float y) {
 	m_head->SetPosition(x + m_bottom->GetSize().x / 2, y - m_head->GetSize().y / 2);
 	y -= m_head->GetSize().y;
 	m_hat->SetPosition(x + m_bottom->GetSize().x / 2, y - m_hat->GetSize().y / 2);
+	static_cast<LevelScene*>(m_scene)->AddTarget(4);
 }
 
 void Snowman::OnRemoveNode(Node* node) {
@@ -146,6 +148,7 @@ void Snowman::OnRemoveNode(Node* node) {
 		m_bottom = nullptr;
 	if (m_scene->GetType() == NT_LEVELSCENE) {
 		static_cast<LevelScene*>(m_scene)->AddScore(10);
+		static_cast<LevelScene*>(m_scene)->AddTarget(-1);
 	}
 
 	if (!m_hat && !m_head && !m_middle && !m_bottom) {

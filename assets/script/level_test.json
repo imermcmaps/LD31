@@ -22,26 +22,6 @@
 			},
 			{
 				"type": "text",
-				"origin": "center",
-				"position": [427, 65],
-				"text": {
-					"font": "assets/lcd_solid.ttf",
-					"size": 15,
-					"text": "Press space to fire"
-				}
-			},
-			{
-				"type": "text",
-				"origin": "center",
-				"position": [382.5, 80],
-				"text": {
-					"font": "assets/lcd_solid.ttf",
-					"size": 15,
-					"text": "1-9 to select the cannon ball"
-				}
-			},
-			{
-				"type": "text",
 				"identifier": "bonusScore",
 				"position": [923, 35],
 				"text": {

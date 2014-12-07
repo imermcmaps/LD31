@@ -19,6 +19,9 @@ protected:
     std::string m_next;
     Cannon* m_cannon;
     uint32_t m_score;
+    uint32_t m_ammoLeft;
+    uint32_t m_targetsLeft;
+    float m_restartTimer;
 public:
     explicit LevelScene(engine::Game* game);
     virtual ~LevelScene();
@@ -37,6 +40,15 @@ public:
     void AddScore(uint32_t score);
     void Next();
     void Restart();
+    void AddAmmo(uint32_t ammo){
+        m_ammoLeft+=ammo;
+        UpdateNext();
+    }
+    void AddTarget(uint32_t targets) {
+        m_targetsLeft+=targets;
+        UpdateNext();
+    }
+    void UpdateNext();
 protected:
     virtual void OnUpdate(sf::Time interval);
 

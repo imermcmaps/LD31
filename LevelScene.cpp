@@ -12,15 +12,22 @@
 #include <Factory.hpp>
 #include "Ui.hpp"
 
-LevelScene::LevelScene(engine::Game* game) : Scene(game), m_cannon(nullptr), m_score(0) {
+LevelScene::LevelScene(engine::Game* game) : Scene(game), m_cannon(nullptr), m_score(0), m_ammoLeft(0), m_targetsLeft(0), m_restartTimer(0) {
 }
 
 LevelScene::~LevelScene() {
-	std::cout << "DEL" << std::endl;
 }
 
 void LevelScene::OnUpdate(sf::Time interval) {
 	engine::Scene::OnUpdate(interval);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+		m_restartTimer += interval.asSeconds();
+		if (m_restartTimer > 1.5) {
+			Restart();
+		}
+	} else {
+		m_restartTimer = 0;
+	}
 	//std::cout << m_game->GetMousePosition().x << "," << m_game->GetMousePosition().y  << std::endl;
 }
 
@@ -49,13 +56,33 @@ void LevelScene::AddScore(uint32_t score) {
 		ui->GetScore()->SetText(ss.str());
 	}
 }
-void LevelScene::Next(){
-	if (m_next != ""){
-		auto game = static_cast<LD31*>(m_game);
-		game->SetScore(game->GetScore()+m_score);
-		static_cast<LD31*>(m_game)->Load(m_next);
+
+void LevelScene::Next() {
+	if (m_next != "") {
+		auto game = static_cast<LD31*> (m_game);
+		game->SetScore(game->GetScore() + m_score + m_ammoLeft*5);
+		static_cast<LD31*> (m_game)->Load(m_next);
 	}
 }
-void LevelScene::Restart(){
-	static_cast<LD31*>(m_game)->Load(m_filename);
+
+void LevelScene::Restart() {
+	static_cast<LD31*> (m_game)->Load(m_filename);
+}
+
+void LevelScene::UpdateNext() {
+	if (!m_ui) {
+		return;
+	}
+	std::ostringstream ss;
+	ss << "+" << m_ammoLeft * 5;
+	Node* bonus = m_ui->GetChildByID("bonusScore");
+	if (bonus->GetType() == engine::NT_TEXT) {
+		static_cast<engine::Text*>(bonus)->SetText(ss.str());
+	}
+
+	if (!m_ammoLeft || !m_targetsLeft) {
+		static_cast<Ui*> (m_ui)->GetNext()->SetActive(true);
+	} else {
+		static_cast<Ui*> (m_ui)->GetNext()->SetActive(false);
+	}
 }

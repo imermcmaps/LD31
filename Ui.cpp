@@ -30,6 +30,9 @@ Ui::~Ui() {
 }
 
 bool Ui::initialize(Json::Value& root) {
+	if (!engine::Node::initialize(root)){
+		return false;
+	}
 	auto& slots = root["slots"];
 	if (slots.isArray()) {
 		for (size_t i = 0; i < slots.size(); i++) {
@@ -45,6 +48,7 @@ bool Ui::initialize(Json::Value& root) {
 			this->AddNode(s);
 			s->SetPosition((s->GetSize().x + 5) * (i + 1), s->GetSize().y / 2 + 10);
 			s->SetCount(slot.get("count", 1).asInt());
+			static_cast<LevelScene*>(m_scene)->AddAmmo(s->GetCount());
 			s->SetProjectile(slot.get("projectile", "").asString());
 			s->SetIcon(slot.get("icon", "").asString());
 			Node* text = s->GetChildByID("slot");
@@ -52,6 +56,7 @@ bool Ui::initialize(Json::Value& root) {
 				std::ostringstream ss;
 				ss << i + 1;
 				static_cast<engine::Text*> (text)->SetText(ss.str());
+				
 			}
 			m_slots.insert(std::make_pair(i, s));
 			if (i == m_currentSlot) {
