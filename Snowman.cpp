@@ -9,30 +9,52 @@
 #include "Factory.hpp"
 #include "Constants.hpp"
 #include "LevelScene.hpp"
+#include "util/Random.hpp"
 
-Snowman::BodyPart::BodyPart(engine::Scene* scene) : SpriteNode(scene), m_health(1), m_dead(false), m_deathCounter(0) {
+Snowman::BodyPart::BodyPart(engine::Scene* scene) : SpriteNode(scene), m_health(0.8), m_dead(false) {
 
 }
 
 void Snowman::BodyPart::Damage(float impact) {
+	if (m_dead) {
+		return;
+	}
 	m_health -= impact;
 	if (m_health < 0) {
 		engine::SpriteNode* explosion = static_cast<engine::SpriteNode*> (engine::Factory::CreateChildFromFile("assets/script/explosion.json", GetScene()));
-		explosion->setScale(GetSize().x * 3 / explosion->GetSize().x, GetSize().x * 3 / explosion->GetSize().x);
+		explosion->setScale(GetSize().x * 2 / explosion->GetSize().x, GetSize().x * 2 / explosion->GetSize().x);
 		explosion->setPosition(GetGlobalPosition());
 		explosion->GetAnimation()->OnOver = [explosion]() {
 			explosion->Delete();
 		};
-		m_dead=true;
-		m_deathCounter=0.3f;
+
+		PlayAnimation("death");
+		GetAnimation()->OnOver = [this]() {
+			Delete();
+		};
+		m_dead = true;
 	}
 }
-void Snowman::BodyPart::OnUpdate(sf::Time interval){
-	if (m_dead){
-		m_deathCounter-=interval.asSeconds();
-		if (m_deathCounter < 0){
-			Delete();
-		}
+
+void Snowman::BodyPart::AddParticle(const b2Vec2& point, float force) {
+	ParticleDef p;
+	p.point = point;
+	p.force = force;
+	m_particles.push_back(p);
+}
+
+void Snowman::BodyPart::OnUpdate(sf::Time interval) {
+	engine::SpriteNode::OnUpdate(interval);
+	while (!m_particles.empty()) {
+		const ParticleDef& p = m_particles.back();
+		engine::SpriteNode* particle = static_cast<engine::SpriteNode*> (engine::Factory::CreateChildFromFile("assets/script/snow_particle.json", GetScene()));
+		particle->GetBody()->SetTransform(p.point, 0);
+		auto rand = engine::util::RandomFloat(-0.05, 0.05);
+		particle->GetBody()->ApplyForceToCenter(b2Vec2(rand(), rand()) , true);
+		particle->GetAnimation()->OnOver = [particle]() {
+			particle->Delete();
+		};
+		m_particles.pop_back();
 	}
 }
 
@@ -53,12 +75,19 @@ void Snowman::ContactHandler::handle(b2Contact* contact, const b2ContactImpulse*
 		snowman = static_cast<Snowman::BodyPart*> (b);
 		other = a;
 	}
-	if (snowman) {
+	if (snowman && other->GetIdentifier() != "particle") {
 		float force = 0;
 		for (uint32_t i = 0; i < impulse->count; i++) {
 			force += impulse->normalImpulses[i];
 		}
-		if (abs(force) > 0.3) {
+		if (abs(force) > 0.05) {
+			b2WorldManifold worldManifold;
+			contact->GetWorldManifold(&worldManifold);
+			for (uint32_t i = 0; i < contact->GetManifold()->pointCount; i++) {
+				for (uint32_t o = 0; o < (std::min(10*contact->GetManifold()->pointCount,50)/contact->GetManifold()->pointCount); o++) {
+					snowman->AddParticle(worldManifold.points[i], force);
+				}
+			}
 			snowman->Damage(abs(force));
 		}
 	}
@@ -116,10 +145,10 @@ void Snowman::OnRemoveNode(Node* node) {
 		m_middle = nullptr;
 	if (node == m_bottom)
 		m_bottom = nullptr;
-	
-	if (!m_hat && !m_head && !m_middle && !m_bottom){
-		if (m_scene->GetType() == NT_LEVELSCENE){
-			static_cast<LevelScene*>(m_scene)->SetSnowman(nullptr);
+
+	if (!m_hat && !m_head && !m_middle && !m_bottom) {
+		if (m_scene->GetType() == NT_LEVELSCENE) {
+			static_cast<LevelScene*> (m_scene)->SetSnowman(nullptr);
 		}
 		Delete();
 	}

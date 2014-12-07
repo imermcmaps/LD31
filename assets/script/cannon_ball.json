@@ -8,10 +8,13 @@
 	"body" : {
 		"allowSleep":false,
 		"bullet": true,
-		"density": 500,
 		"linearVelocity": [750, 0],
 		"shapes":[
-			{"type":"circle", "x":0, "y":0, "radius":7.5}
+			{
+				"type":"circle", "x":0, "y":0, "radius":7.5, "density": 1000,
+				"category": 4, // proj
+				"mask": 2	// parti
+			}
 		]
 	}
 }

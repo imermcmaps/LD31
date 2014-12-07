@@ -33,12 +33,10 @@ Cannon::~Cannon() {
 }
 
 void Cannon::Fire() {
-
 	SpriteNode* barrel = static_cast<SpriteNode*> (m_children.front());
 	barrel->PlayAnimation("fire");
 	auto delta = m_scene->GetGame()->GetMousePosition() - barrel->GetGlobalPosition();
 	float angle = engine::util::minmax<float>(-80*engine::util::fPI/180.0,atan2(delta.y, delta.x), 5*engine::util::fPI/180.0);
-	std::cout << angle*180/engine::util::fPI <<std::endl;
 	auto p = static_cast<Projectile*> (engine::Factory::CreateChildFromFile(m_cannonBall, this->GetParent()));
 	if (!p->GetBody()) {
 		std::cerr << "Cannon ball '" << m_cannonBall << "' does not have a body" << std::endl;
@@ -47,6 +45,8 @@ void Cannon::Fire() {
 	}
 	p->GetBody()->SetTransform(b2Vec2(barrel->GetGlobalPosition().x/m_scene->GetPixelMeterRatio(), barrel->GetGlobalPosition().y/m_scene->GetPixelMeterRatio()), angle);
 	p->GetBody()->SetLinearVelocity(b2Vec2(p->GetBody()->GetLinearVelocity().x * cosf(angle), p->GetBody()->GetLinearVelocity().x * sinf(angle)));
+	m_loaded=false;
+	OnFire.Fire(this);
 }
 
 void Cannon::OnUpdate(sf::Time interval) {

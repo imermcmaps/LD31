@@ -1,0 +1,33 @@
+{
+	"type": "sprite",
+	"size": [3,3],
+	"origin": "center",
+	"identifier": "particle",
+	"sprite":{
+		"sheet": {
+			"texture": "assets/images/particle.png",
+			"sprites": [
+				{"left":0, "top":0, "width":3, "height":3}
+			]
+		},
+		"animations": {
+			"default": {
+				// being lazy here, using callback to delete particle
+				"frames": [0,0],
+				"speed": 2,
+				"loop": false
+			}
+		}
+		
+	},
+	"body": {
+		"linearVelocity": [100,100],
+		"shapes": [
+			{
+				"type":"box", "x": 3, "y":3, "density": 1,
+				"category": 2, // particle
+				"mask": 4 // projectile
+			}
+		]
+	}
+}

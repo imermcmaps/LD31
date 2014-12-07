@@ -15,14 +15,20 @@ class Snowman : public engine::Node {
 public:
 
     class BodyPart : public engine::SpriteNode {
+    public:
+        struct ParticleDef{
+            b2Vec2 point;
+            float force;
+        };
     protected:
         float m_health;
         bool m_dead;
-        float m_deathCounter;
+        std::vector<ParticleDef> m_particles;
     public:
         BodyPart(engine::Scene* scene);
         void Damage(float impact);
         virtual void OnUpdate(sf::Time interval);
+        void AddParticle(const b2Vec2& point, float force);
 
     };
 

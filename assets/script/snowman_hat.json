@@ -8,15 +8,19 @@
 			"default":{
 				"frames":[0],
 				"loop":true
+			},
+			"death": {
+				"frames": [4,5,6,7],
+				"loop": false,
+				"speed": 0.05
 			}
 		}
 	},
 	"body" : {
 		"allowSleep":false,
-		"density": 0.5,
 		"type": "dynamic",
 		"shapes":[
-			{"type":"box", "width": 25, "height": 20}
+			{"type":"box", "width": 25, "height": 20, "density": 25}
 		]
 	}
 }

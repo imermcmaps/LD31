@@ -1,0 +1,32 @@
+{
+	"type": "slot",
+	"size": [50, 50],
+	"origin":"center",
+	"sprite": {
+		"texture": "assets/images/slot.png"
+	},
+	"children": [
+		{
+			"type": "text",
+			"identifier": "count",
+			"position": [5,25],
+			"text": {
+				"font": "assets/lcd_solid.ttf",
+				"size": 20, 
+				"text": "12"
+			}
+		},
+		{
+			"type": "text",
+			"identifier": "slot",
+			"position": [35, 3],
+			"text": {
+				"font": "assets/lcd_solid.ttf",
+				"size": 15, 
+				"text": "1",
+				"color": [200, 200 ,200]
+			}
+		}
+		
+	]		
+}

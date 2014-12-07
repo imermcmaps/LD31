@@ -37,6 +37,11 @@ public:
         return m_loaded;
     }
     virtual bool initialize(Json::Value& root);
+
+    void SetLoaded(bool loaded) {
+        m_loaded = loaded;
+    }
+    engine::util::Event<Cannon*> OnFire;
 protected:
     virtual void OnUpdate(sf::Time interval);
 

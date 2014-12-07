@@ -69,6 +69,7 @@ set(SOURCE_FILES main.cpp
 				 Snowman.cpp
 				 Cannon.cpp
 				 Projectile.cpp
+				 Ui.cpp
 )
 add_executable(LD31 ${SOURCE_FILES})
 

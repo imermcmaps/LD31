@@ -10,7 +10,8 @@
 #include <iostream>
 #include "Constants.hpp"
 #include <Factory.hpp>
-LevelScene::LevelScene(LD31* game): Scene(game) {
+#include "Ui.hpp"
+LevelScene::LevelScene(LD31* game): Scene(game), m_cannon(nullptr) {
 }
 
 LevelScene::~LevelScene() {
@@ -23,4 +24,14 @@ void LevelScene::OnUpdate(sf::Time interval){
 
 uint8_t LevelScene::GetType() const{
 	return NT_LEVELSCENE;
+}
+bool LevelScene::initialize(Json::Value& root){
+	if (!engine::Scene::initialize(root)){
+		return false;
+	}
+	if (root.isMember("ui")){
+		Json::Value& ui = root["ui"];
+		m_ui = engine::Factory::createJson<Ui, Scene*>(ui, this);
+	}
+	return true;
 }

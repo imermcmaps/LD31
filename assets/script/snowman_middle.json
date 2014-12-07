@@ -9,15 +9,19 @@
 			"default":{
 				"frames":[2],
 				"loop":true
+			},
+			"death": {
+				"frames": [12,13,14,15],
+				"loop": false,
+				"speed": 0.05
 			}
 		}
 	},
 	"body" : {
 		"allowSleep":false,
-		"density": 30,
 		"shapes":[
-			{"type":"circle", "x":-2, "y":0, "radius":21},
-			{"type":"circle", "x":2, "y":0, "radius":21}
+			{"type":"circle", "x":-2, "y":0, "radius":21, "density": 50},
+			{"type":"circle", "x":2, "y":0, "radius":21, "density": 50}
 		]
 	}
 }

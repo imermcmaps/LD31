@@ -4,26 +4,31 @@
 	"gravity": [0,2],
 	"debug": false,
 	"light": {
-		"enabled":false,
-		"ambient": [224,245,255]
+		"enabled":true,
+		"ambient": [234,245,255]
+	},
+	"ui": {
+		"slots": [
+			{
+				"projectile": "assets/script/cannon_ball.json",
+				"icon": "assets/script/icon_cannon_ball.json"
+				
+			},
+			{
+				"projectile": "assets/script/cannon_ball.json",
+				"icon": "assets/script/icon_cannon_ball.json",
+				"count": 5
+			}
+		]
 	},
 	"children": [
 		{
-			"type":"snowman",
-			"position":[500,576]
-		},
-		{
-			"childData":"assets/script/explosion.json",
-			"position":[500,500],
-			"size": [240,240]
-		},
-		{
-			"childData":"assets/script/cannon.json",
-			"position":[20,572]
-		},
-		{
+			"type":"sprite",
 			"position": [0,0],
 			"size": [1024, 576],
+			"sprite": {
+				"texture": "assets/images/level.png"
+			},
 			"body": {
 				"type":"static", 
 				"shapes":[
@@ -33,6 +38,15 @@
 					{"type":"edge", "points":[[0,0], [1024,0]]}
 				] 
 			}
+		},
+		{
+			"type":"snowman",
+			"position":[500,576]
+		},
+		{
+			"childData":"assets/script/cannon.json",
+			"position":[20,572]
 		}
+		
 	]
 }
