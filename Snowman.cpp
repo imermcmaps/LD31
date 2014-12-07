@@ -11,15 +11,19 @@
 #include "LevelScene.hpp"
 #include "util/Random.hpp"
 
-Snowman::BodyPart::BodyPart(engine::Scene* scene) : SpriteNode(scene), m_health(0.8), m_dead(false) {
-
+Snowman::BodyPart::BodyPart(engine::Scene* scene) : Damageable(scene), m_dead(false) {
+	m_health = 0.8;
 }
 
-void Snowman::BodyPart::Damage(float impact) {
-	if (m_dead) {
+void Snowman::BodyPart::Damage(float damage, Node* by, const b2WorldManifold& manifold) {
+	if (m_dead || (by && by->GetType() == NT_SNOWMANPART)) {
 		return;
 	}
-	m_health -= impact;
+	std::cout << damage << std::endl;
+	for (uint32_t o = 0; o < 5; o++) {
+		AddParticle(manifold.points[0], damage);
+	}
+	m_health -= damage;
 	if (m_health < 0) {
 		engine::SpriteNode* explosion = static_cast<engine::SpriteNode*> (engine::Factory::CreateChildFromFile("assets/script/explosion.json", GetScene()));
 		explosion->setScale(GetSize().x * 2 / explosion->GetSize().x, GetSize().x * 2 / explosion->GetSize().x);
@@ -49,49 +53,12 @@ void Snowman::BodyPart::OnUpdate(sf::Time interval) {
 		const ParticleDef& p = m_particles.back();
 		engine::SpriteNode* particle = static_cast<engine::SpriteNode*> (engine::Factory::CreateChildFromFile("assets/script/snow_particle.json", GetScene()));
 		particle->GetBody()->SetTransform(p.point, 0);
-		auto rand = engine::util::RandomFloat(-0.01, 0.01);
+		auto rand = engine::util::RandomFloat(-0.1, 0.1);
 		particle->GetBody()->ApplyForceToCenter(b2Vec2(rand(), rand()) , true);
 		particle->GetAnimation()->OnOver = [particle]() {
 			particle->Delete();
 		};
 		m_particles.pop_back();
-	}
-}
-
-Snowman::ContactHandler::ContactHandler(Snowman* snowman) : m_snowman(snowman) {
-
-}
-
-void Snowman::ContactHandler::handle(b2Contact* contact, const b2ContactImpulse* impulse) {
-	engine::Node* a = static_cast<engine::Node*> (contact->GetFixtureA()->GetBody()->GetUserData());
-	engine::Node* b = static_cast<engine::Node*> (contact->GetFixtureB()->GetBody()->GetUserData());
-
-	Snowman::BodyPart* snowman = nullptr;
-	engine::Node* other = nullptr;
-	if (a && 
-			a->GetParent() == m_snowman &&
-			b->GetParent()->GetType() != NT_SNOWMAN) {
-		snowman = static_cast<Snowman::BodyPart*> (a);
-		other = b;
-	} else if (b && b->GetParent() == m_snowman && b->GetParent()->GetType() != NT_SNOWMAN) {
-		snowman = static_cast<Snowman::BodyPart*> (b);
-		other = a;
-	}
-	if (snowman && other->GetIdentifier() != "particle") {
-		float force = 0;
-		for (uint32_t i = 0; i < impulse->count; i++) {
-			force += impulse->normalImpulses[i];
-		}
-		if (abs(force) > 0.05) {
-			b2WorldManifold worldManifold;
-			contact->GetWorldManifold(&worldManifold);
-			for (uint32_t i = 0; i < contact->GetManifold()->pointCount; i++) {
-				for (uint32_t o = 0; o < (std::min(10*contact->GetManifold()->pointCount,50)/contact->GetManifold()->pointCount); o++) {
-					snowman->AddParticle(worldManifold.points[i], force);
-				}
-			}
-			snowman->Damage(abs(force));
-		}
 	}
 }
 
@@ -102,15 +69,17 @@ engine::Node* Snowman::manufacture(Json::Value& root, engine::Node* parent) {
 	} else if (root["position"].isObject()) {
 		s->Initialize(root["position"].get("x", 0).asFloat(), root["position"].get("y", 0).asFloat());
 	}
+	if (root["sprite"]["flipped"].isBool()){
+		s->SetFlipped(root["sprite"].get("flipped", false).asBool());
+	}
 	return s;
 }
 
-Snowman::Snowman(engine::Scene* scene) : Node(scene), m_hat(nullptr), m_head(nullptr), m_middle(nullptr), m_bottom(nullptr), m_initialized(false), m_contactHandler(this) {
-	m_scene->OnContactPostSolve.AddHandler(&m_contactHandler);
+Snowman::Snowman(engine::Scene* scene) : Node(scene), m_hat(nullptr), m_head(nullptr), m_middle(nullptr), m_bottom(nullptr), m_initialized(false) {
 }
 
 Snowman::~Snowman() {
-	m_scene->OnContactPostSolve.RemoveHandler(&m_contactHandler);
+	
 }
 
 void Snowman::Initialize(float x, float y) {

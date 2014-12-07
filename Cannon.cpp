@@ -45,7 +45,12 @@ void Cannon::Fire() {
 	SpriteNode* barrel = static_cast<SpriteNode*> (m_children.front());
 	barrel->PlayAnimation("fire");
 	auto delta = m_scene->GetGame()->GetMousePosition() - barrel->GetGlobalPosition();
-	float angle = engine::util::minmax<float>(-80*engine::util::fPI/180.0,atan2(delta.y, delta.x), 5*engine::util::fPI/180.0);
+	float angle = atan2(delta.y, delta.x);
+	angle += 90;
+	if (angle > 180){
+		angle -= 360;
+	}
+	angle = engine::util::minmax<float>(20, abs(angle), 100)*(angle<0?-1:1)-90;
 	auto p = static_cast<Projectile*> (engine::Factory::CreateChildFromFile(m_cannonBall, this->GetParent()));
 	if (!p->GetBody()) {
 		std::cerr << "Cannon ball '" << m_cannonBall << "' does not have a body" << std::endl;
@@ -70,7 +75,15 @@ void Cannon::OnUpdate(sf::Time interval) {
 	float angle = atan2(delta.y, delta.x);
 	angle *= 180 / engine::util::fPI;
 	angle += 90;
-	barrel->setRotation(engine::util::minmax<float>(15, angle, 100));
+	if (angle > 180){
+		angle -= 360;
+	}
+	barrel->setRotation(engine::util::minmax<float>(20, abs(angle), 100)*(angle<0?-1:1));
+	if (angle < 0){
+		static_cast<engine::SpriteNode*>(barrel)->setOrigin(12, 50);
+	}else{
+		static_cast<engine::SpriteNode*>(barrel)->setOrigin(21, 50);
+	}
 }
 
 bool Cannon::initialize(Json::Value& root) {

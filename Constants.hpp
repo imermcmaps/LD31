@@ -10,7 +10,8 @@
 #include "Node.hpp"
 enum LD31_TYPES{
     NT_LEVELSCENE = engine::NT_END,
-    NT_SNOWMAN
+    NT_SNOWMAN,
+    NT_SNOWMANPART
 };
 
 #endif	/* LD31_CONSTANTS_HPP */

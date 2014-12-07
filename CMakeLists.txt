@@ -71,6 +71,7 @@ set(SOURCE_FILES main.cpp
 				 Projectile.cpp
 				 Ui.cpp
 				 LoadingScene.cpp
+				 Damageable.cpp
 )
 add_executable(LD31 ${SOURCE_FILES})
 
