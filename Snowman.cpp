@@ -53,7 +53,7 @@ void Snowman::BodyPart::OnUpdate(sf::Time interval) {
 		const ParticleDef& p = m_particles.back();
 		engine::SpriteNode* particle = static_cast<engine::SpriteNode*> (engine::Factory::CreateChildFromFile("assets/script/snow_particle.json", GetScene()));
 		particle->GetBody()->SetTransform(p.point, 0);
-		auto rand = engine::util::RandomFloat(-0.1, 0.1);
+		auto rand = engine::util::RandomFloat(-0.01, 0.01);
 		particle->GetBody()->ApplyForceToCenter(b2Vec2(rand(), rand()) , true);
 		particle->GetAnimation()->OnOver = [particle]() {
 			particle->Delete();

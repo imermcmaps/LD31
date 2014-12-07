@@ -1,10 +1,3 @@
-/* 
- * File:   Explosive.cpp
- * Author: iMer
- * 
- * Created on 7. Dezember 2014, 20:58
- */
-
 #include "Damageable.hpp"
 #include <Scene.hpp>
 Damageable::ContactHandler::ContactHandler(Damageable* damageable) : m_damageable(damageable) {

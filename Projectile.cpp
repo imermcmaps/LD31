@@ -44,6 +44,7 @@ bool Projectile::initialize(Json::Value& root){
 		return false;
 	}
 	m_doesExplode = root.get("explode", false).asBool();
+	return true;
 }
 void Projectile::OnUpdate(sf::Time interval){
 	if (m_explode){

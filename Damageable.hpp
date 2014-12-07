@@ -1,12 +1,5 @@
-/* 
- * File:   Explosive.hpp
- * Author: iMer
- *
- * Created on 7. Dezember 2014, 20:58
- */
-
-#ifndef LD31_EXPLOSIVE_HPP
-#define	LD31_EXPLOSIVE_HPP
+#ifndef LD31_DAMAGEABLE_HPP
+#define	LD31_DAMAGEABLE_HPP
 
 #include <SpriteNode.hpp>
 
@@ -31,5 +24,5 @@ private:
 
 };
 
-#endif	/* EXPLOSIVE_HPP */
+#endif	/* LD31_DAMAGEABLE_HPP */
 
