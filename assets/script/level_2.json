@@ -3,12 +3,55 @@
 	"pixelToMeter": 200.0,
 	"gravity": [0, 2],
 	"debug": false,
-	"next": "assets/script/level_2.json",
+	"next": "assets/script/level_1.json",
 	"light": {
 		"enabled": true,
 		"ambient": [234, 245, 255]
 	},
 	"ui": {
+		"children": [
+			{
+				"type": "text",
+				"origin": "center",
+				"position": [436, 50],
+				"text": {
+					"font": "assets/lcd_solid.ttf",
+					"size": 15,
+					"text": "Hold R to restart"
+				}
+			},
+			{
+				"type": "text",
+				"origin": "center",
+				"position": [427, 65],
+				"text": {
+					"font": "assets/lcd_solid.ttf",
+					"size": 15,
+					"text": "Press space to fire"
+				}
+			},
+			{
+				"type": "text",
+				"origin": "center",
+				"position": [382.5, 80],
+				"text": {
+					"font": "assets/lcd_solid.ttf",
+					"size": 15,
+					"text": "1-9 to select the cannon ball"
+				}
+			},
+			{
+				"type": "text",
+				"identifier": "bonusScore",
+				"position": [923, 35],
+				"text": {
+					"font": "assets/lcd_solid.ttf",
+					"size": 20,
+					"text": "+0",
+					"color": [229, 204, 94]
+				}
+			}
+		],
 		"slots": [
 			{
 				"projectile": "assets/script/cannon_ball.json",
@@ -16,7 +59,7 @@
 				"count": 10
 			},
 			{
-				"projectile": "assets/script/cannon_ball.json",
+				"projectile": "assets/script/missile.json",
 				"icon": "assets/script/icon_cannon_ball.json",
 				"count": 5
 			}
@@ -34,7 +77,7 @@
 			"type": "button",
 			"origin": "center",
 			"size": [88, 40],
-			"position": [512, 20],
+			"position": [512, 30],
 			"sprite": {
 				"sheet": {
 					"texture": "assets/images/buttons.png",
@@ -92,12 +135,13 @@
 			}
 		},
 		{
-			"type": "snowman",
-			"position": [500, 576]
-		},
-		{
-			"childData": "assets/script/cannon.json",
-			"position": [20, 572]
+			"type": "objectPlacer",
+			"objects": [
+				"assets/script/log_h.json",
+				"assets/script/log_w.json",
+				"assets/script/snowman.json",
+				"assets/script/cannon.json"
+			]
 		}
 
 	]

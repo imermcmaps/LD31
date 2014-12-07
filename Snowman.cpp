@@ -102,11 +102,6 @@ engine::Node* Snowman::manufacture(Json::Value& root, engine::Node* parent) {
 	} else if (root["position"].isObject()) {
 		s->Initialize(root["position"].get("x", 0).asFloat(), root["position"].get("y", 0).asFloat());
 	}
-	if (parent->GetType() == NT_LEVELSCENE) {
-		LevelScene* level = static_cast<LevelScene*> (parent);
-	} else {
-		std::cerr << "Creating snowman with non-levelscene as a parent. Stuff might not work correctly." << std::endl;
-	}
 	return s;
 }
 

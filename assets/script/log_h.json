@@ -1,0 +1,19 @@
+{
+	"type": "sprite",
+	"size": [18, 40],
+	"origin": "center",
+	"sprite": {
+		"sheet": {
+			"texture": "assets/images/log.png",
+			"sprites": [
+				{"left":0, "top": 0, "width":9, "height": 20}
+			]
+		}
+	},
+	"body": {
+		"type":"static",
+		"shapes": [
+			{"type": "box", "width":18, "height": 40}
+		]
+	}
+}

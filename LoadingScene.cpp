@@ -11,15 +11,7 @@
 #include "LevelScene.hpp"
 #include <Game.hpp>
 
-LoadingScene::DeleteHandler::DeleteHandler(LoadingScene* scene) : m_scene(scene) {
-
-}
-
-void LoadingScene::DeleteHandler::handle(Node*) {
-	m_scene->m_delete = true;
-}
-
-LoadingScene::LoadingScene(engine::Game* game) : Scene(game), m_delete(false), m_deleteHandler(this) {
+LoadingScene::LoadingScene(engine::Game* game) : Scene(game), m_delete(false){
 }
 
 LoadingScene::~LoadingScene() {
@@ -27,7 +19,6 @@ LoadingScene::~LoadingScene() {
 
 void LoadingScene::Load(Scene* old, std::string target) {
 	m_old=old;
-	m_old->OnDelete.AddHandler(&m_deleteHandler);
 	m_target=target;
 	m_delete=false;
 	m_game->SetScene(this);

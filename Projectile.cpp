@@ -26,9 +26,7 @@ void Projectile::ContactHandler::handle(b2Contact* contact, bool begin) {
 		other = a;
 	}
 	if (projectile) {
-		std::cout << "HIT" << std::endl;
 		if (projectile->IsExplode()){
-		std::cout << "EXPLODE" << std::endl;
 			projectile->SetExplode(true);
 		}
 	}
