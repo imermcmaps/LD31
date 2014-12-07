@@ -106,21 +106,25 @@ void Ui::OnUpdate(sf::Time interval) {
 		m_updateSelect=false;
 	}
 	if (m_init){
-		Select();
+		m_init=Select();
 		static_cast<LevelScene*>(m_scene)->AddScore(0);
-		m_init=false;
 	}
 #undef P
 }
-void Ui::Select(){
+bool Ui::Select(){
 	auto s = GetCurrentSlot();
 	s->SetSelected(true);
 	if (m_scene->GetType() == NT_LEVELSCENE) {
-		static_cast<LevelScene*> (m_scene)->GetCannon()->SetCannonBall(s->GetProjectile());
+		auto cannon = static_cast<LevelScene*> (m_scene)->GetCannon();
+		if (!cannon){
+			return false;
+		}
+		cannon->SetCannonBall(s->GetProjectile());
 		if (s->GetCount() > 0) {
-			static_cast<LevelScene*> (m_scene)->GetCannon()->SetLoaded(true);
+			cannon->SetLoaded(true);
 		} else {
-			static_cast<LevelScene*> (m_scene)->GetCannon()->SetLoaded(false);
+			cannon->SetLoaded(false);
 		}
 	}
+	return true;
 }

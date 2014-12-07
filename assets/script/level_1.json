@@ -56,10 +56,10 @@
 			{
 				"projectile": "assets/script/cannon_ball.json",
 				"icon": "assets/script/icon_cannon_ball.json",
-				"count": 10
+				"count": 1
 			},
 			{
-				"projectile": "assets/script/missile.json",
+				"projectile": "assets/script/cannon_ball.json",
 				"icon": "assets/script/icon_cannon_ball.json",
 				"count": 5
 			}
@@ -135,13 +135,92 @@
 			}
 		},
 		{
-			"type": "objectPlacer",
-			"objects": [
-				"assets/script/log_h.json",
-				"assets/script/log_w.json",
-				"assets/script/snowman.json",
-				"assets/script/cannon.json"
-			]
+			"childData": "assets/script/log_w.json",
+			"position": [20.00000381469727, 286]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [60.00000381469727, 286]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [100.0000152587891, 286]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [140, 286]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [458, 312]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [498.0000610351563, 312]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [538, 312]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [567, 301]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [567, 261]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [567, 220.9999847412109]
+		},
+		{
+			"childData": "assets/script/cannon.json",
+			"position": [79, 277]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [430.0000305175781, 301]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [180, 286]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [220, 286]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [260, 286]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [300, 286]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [340, 286]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [380, 286]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [418.9999694824219, 286]
+		},
+		{
+			"childData": "assets/script/snowman.json",
+			"position": [485, 303]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [567, 182]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [567, 142]
 		}
 
 	]

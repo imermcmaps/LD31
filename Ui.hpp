@@ -107,7 +107,7 @@ public:
     }
 protected:
     virtual void OnUpdate(sf::Time interval);
-    void Select();
+    bool Select();
 
 
 };
