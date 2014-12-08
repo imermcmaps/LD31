@@ -2,6 +2,7 @@
 	"texture": "assets/images/projectiles.png",
 	"sprites": [
 		{"left":0, "top": 0, "width":5, "height":5}, // cannon ball
-		{"left":5, "top": 0, "width":6, "height":4} // missile
+		{"left":5, "top": 0, "width":6, "height":4}, // missile
+		{"left":0, "top": 5, "width": 10, "height": 10} // slug icon
 	]
 }

@@ -16,6 +16,8 @@
 #include "Ui.hpp"
 #include "Constants.hpp"
 #include "LevelScene.hpp"
+#include "util/Random.hpp"
+
 Cannon::KeyHandler::KeyHandler(Cannon* cannon) : m_cannon(cannon) {
 
 }
@@ -28,15 +30,15 @@ void Cannon::KeyHandler::handle(const sf::Event::KeyEvent& e) {
 
 Cannon::Cannon(engine::Scene* scene) : SpriteNode(scene), m_keyHandler(this) {
 	scene->GetGame()->OnKeyDown.AddHandler(&m_keyHandler);
-	if (scene->GetType() == NT_LEVELSCENE){
-		static_cast<LevelScene*>(m_scene)->SetCannon(this);
+	if (scene->GetType() == NT_LEVELSCENE) {
+		static_cast<LevelScene*> (m_scene)->SetCannon(this);
 	}
 }
 
 Cannon::~Cannon() {
 	m_scene->GetGame()->OnKeyDown.RemoveHandler(&m_keyHandler);
-	if (m_scene->GetType() == NT_LEVELSCENE){
-		auto s=static_cast<LevelScene*>(m_scene);
+	if (m_scene->GetType() == NT_LEVELSCENE) {
+		auto s = static_cast<LevelScene*> (m_scene);
 		if (s->GetCannon() == this) s->SetCannon(nullptr);
 	}
 }
@@ -47,24 +49,37 @@ void Cannon::Fire() {
 	auto delta = m_scene->GetGame()->GetMousePosition() - barrel->GetGlobalPosition();
 	float angle = atan2(delta.y, delta.x);
 	angle += 90;
-	if (angle > 180){
+	if (angle > 180) {
 		angle -= 360;
 	}
-	angle = engine::util::minmax<float>(20, abs(angle), 100)*(angle<0?-1:1)-90;
-	auto p = static_cast<Projectile*> (engine::Factory::CreateChildFromFile(m_cannonBall, this->GetParent()));
+	angle = engine::util::minmax<float>(20, abs(angle), 100)*(angle < 0 ? -1 : 1) - 90;
+	auto p = static_cast<Projectile*> (engine::Factory::CreateChildFromFile(m_cannonBall, this));
 	if (!p->GetBody()) {
-		std::cerr << "Cannon ball '" << m_cannonBall << "' does not have a body" << std::endl;
-		p->Delete();
-		return;
+		auto& c = p->GetChildren();
+		bool foundBody = false;
+		auto rand2 = engine::util::RandomFloat(0.5, 2);
+		for (auto it = c.begin(); it != c.end(); it++) {
+			if ((*it)->GetBody()) {
+				(*it)->GetBody()->SetTransform(b2Vec2(barrel->GetGlobalPosition().x / m_scene->GetPixelMeterRatio(), barrel->GetGlobalPosition().y / m_scene->GetPixelMeterRatio()), angle);
+				(*it)->GetBody()->SetLinearVelocity(b2Vec2((*it)->GetBody()->GetLinearVelocity().x * cosf(angle) * rand2(), (*it)->GetBody()->GetLinearVelocity().x * sinf(angle) * rand2()));
+				foundBody=true;
+			}
+		}
+		if (!foundBody) {
+			std::cerr << "Cannon ball '" << m_cannonBall << "' does not have a body" << std::endl;
+			p->Delete();
+			return;
+		}
+	} else {
+		p->GetBody()->SetTransform(b2Vec2(barrel->GetGlobalPosition().x / m_scene->GetPixelMeterRatio(), barrel->GetGlobalPosition().y / m_scene->GetPixelMeterRatio()), angle);
+		p->GetBody()->SetLinearVelocity(b2Vec2(p->GetBody()->GetLinearVelocity().x * cosf(angle), p->GetBody()->GetLinearVelocity().x * sinf(angle)));
 	}
-	p->GetBody()->SetTransform(b2Vec2(barrel->GetGlobalPosition().x/m_scene->GetPixelMeterRatio(), barrel->GetGlobalPosition().y/m_scene->GetPixelMeterRatio()), angle);
-	p->GetBody()->SetLinearVelocity(b2Vec2(p->GetBody()->GetLinearVelocity().x * cosf(angle), p->GetBody()->GetLinearVelocity().x * sinf(angle)));
-	Ui* ui = static_cast<Ui*>(m_scene->GetUi());
+	Ui* ui = static_cast<Ui*> (m_scene->GetUi());
 	Ui::Slot* s = ui->GetCurrentSlot();
-	s->SetCount(s->GetCount()-1);
-	static_cast<LevelScene*>(m_scene)->AddAmmo(-1);
-	if (s->GetCount() <= 0){
-		m_loaded=false;
+	s->SetCount(s->GetCount() - 1);
+	static_cast<LevelScene*> (m_scene)->AddAmmo(-1);
+	if (s->GetCount() <= 0) {
+		m_loaded = false;
 	}
 }
 
@@ -75,14 +90,14 @@ void Cannon::OnUpdate(sf::Time interval) {
 	float angle = atan2(delta.y, delta.x);
 	angle *= 180 / engine::util::fPI;
 	angle += 90;
-	if (angle > 180){
+	if (angle > 180) {
 		angle -= 360;
 	}
-	barrel->setRotation(engine::util::minmax<float>(20, abs(angle), 100)*(angle<0?-1:1));
-	if (angle < 0){
-		static_cast<engine::SpriteNode*>(barrel)->setOrigin(12, 50);
-	}else{
-		static_cast<engine::SpriteNode*>(barrel)->setOrigin(21, 50);
+	barrel->setRotation(engine::util::minmax<float>(20, abs(angle), 100)*(angle < 0 ? -1 : 1));
+	if (angle < 0) {
+		static_cast<engine::SpriteNode*> (barrel)->setOrigin(12, 50);
+	} else {
+		static_cast<engine::SpriteNode*> (barrel)->setOrigin(21, 50);
 	}
 }
 

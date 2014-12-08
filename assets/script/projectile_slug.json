@@ -1,0 +1,53 @@
+{
+	"children": [
+		{
+			"type": "projectile", "origin": "center", "sprite": { "sheet": "assets/script/sheet_projectiles.json"},
+			"size": [5, 5],
+			"body": {
+				"bullet": true, "linearVelocity": [1400, 0],
+				"shapes": [ { "type": "circle", "density": 1000, "category": 4, "mask": 2, "radius": 2}]
+			}
+		},
+		{
+			"type": "projectile", "origin": "center", "sprite": { "sheet": "assets/script/sheet_projectiles.json"},
+			"size": [3, 3],
+			"body": {
+				"bullet": true, "linearVelocity": [1400, 0],
+				"shapes": [ { "type": "circle", "density": 1000, "category": 4, "mask": 2, "radius": 1.5}]
+			}
+		},
+		{
+			"type": "projectile", "origin": "center", "sprite": { "sheet": "assets/script/sheet_projectiles.json"},
+			"size": [6, 6],
+			"body": {
+				"bullet": true, "linearVelocity": [1400, 0],
+				"shapes": [ { "type": "circle", "density": 1000, "category": 4, "mask": 2, "radius": 3}]
+			}
+		},
+		{
+			"type": "projectile", "origin": "center", "sprite": { "sheet": "assets/script/sheet_projectiles.json"},
+			"size": [4, 4],
+			"body": {
+				"bullet": true, "linearVelocity": [1400, 0],
+				"shapes": [ { "type": "circle", "density": 1000, "category": 4, "mask": 2, "radius": 2}]
+			}
+		},
+		{
+			"type": "projectile", "origin": "center", "sprite": { "sheet": "assets/script/sheet_projectiles.json"},
+			"size": [5, 5],
+			"body": {
+				"bullet": true, "linearVelocity": [1400, 0],
+				"shapes": [ { "type": "circle", "density": 1000, "category": 4, "mask": 2, "radius": 2}]
+			}
+		},
+		{
+			"type": "projectile", "origin": "center", "sprite": { "sheet": "assets/script/sheet_projectiles.json"},
+			"size": [5, 5],
+			"body": {
+				"bullet": true, "linearVelocity": [1400, 0],
+				"shapes": [ { "type": "circle", "density": 1000, "category": 4, "mask": 2, "radius": 2}]
+			}
+		}
+	]
+
+}

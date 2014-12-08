@@ -1,0 +1,140 @@
+{
+	"size": [1024, 576],
+	"pixelToMeter": 200.0,
+	"gravity": [0, 2],
+	"debug": false,
+	"next": "",
+	"ui": {
+		"children": [
+			{
+				"type": "text",
+				"origin": "center",
+				"position": [300, 250],
+				"text": {
+					"font": "assets/lcd_solid.ttf",
+					"size": 50,
+					"text": "Thanks for playing!"
+				}
+			},
+			{
+				"type": "text",
+				"render": false,
+				"identifier": "bonusScore",
+				"position": [923, 35],
+				"text": {
+					"font": "assets/lcd_solid.ttf",
+					"size": 20,
+					"text": "+0",
+					"color": [229, 204, 94]
+				}
+			}
+		],
+		"slots": [
+			{
+				"projectile": "assets/script/cannon_ball.json",
+				"icon": "assets/script/icon_cannon_ball.json",
+				"count": 7
+			},
+			{
+				"projectile": "assets/script/missile.json",
+				"icon": "assets/script/icon_missile.json",
+				"count": 5
+			},
+			{
+				"projectile": "assets/script/projectile_slug.json",
+				"icon": "assets/script/icon_slug.json",
+				"count": 5
+			}
+		],
+		"score": {
+			"type": "text",
+			"position": [300, 300],
+			"text": {
+				"font": "assets/lcd_solid.ttf",
+				"size": 50,
+				"text": "Score: 0"
+			}
+		},
+		"next": {
+			"type": "button",
+			"origin": "center",
+			"size": [88, 40],
+			"position": [512, 30],
+			"sprite": {
+				"sheet": {
+					"texture": "assets/images/buttons.png",
+					"sprites": [
+						{
+							"left": 0,
+							"top": 0,
+							"width": 44,
+							"height": 20
+						},
+						{
+							"left": 0,
+							"top": 20,
+							"width": 44,
+							"height": 20
+						},
+						{
+							"left": 0,
+							"top": 40,
+							"width": 44,
+							"height": 20
+						}
+					]
+				},
+				"animations": {
+					"default": {
+						"frames": [0],
+						"loop": true
+					},
+					"hover": {
+						"frames": [1],
+						"loop": true
+					},
+					"active": {
+						"frames": [2],
+						"loop": true
+					}
+				}
+			}
+		}
+	},
+	"children": [
+		{
+			"type": "sprite",
+			"position": [0, 0],
+			"size": [1024, 576],
+			"sprite": {
+				"texture": "assets/images/level.png"
+			},
+			"body": {
+				"type": "static",
+				"shapes": [
+					{
+						"type": "edge",
+						"points": [[0, 576], [1024, 576]]
+					},
+					{
+						"type": "edge",
+						"points": [[0, 0], [0, 576]]
+					},
+					{
+						"type": "edge",
+						"points": [[1024, 0], [1024, 576]]
+					},
+					{
+						"type": "edge",
+						"points": [[0, 0], [1024, 0]]
+					}
+				]
+			}
+		},
+		{
+			"childData": "assets/script/snowman.json",
+			"active": false,
+			"position": [0, 0]
+		}
+	]
+}

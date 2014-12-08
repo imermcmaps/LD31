@@ -56,12 +56,7 @@
 			{
 				"projectile": "assets/script/cannon_ball.json",
 				"icon": "assets/script/icon_cannon_ball.json",
-				"count": 10
-			},
-			{
-				"projectile": "assets/script/missile.json",
-				"icon": "assets/script/icon_cannon_ball.json",
-				"count": 5
+				"count": 3
 			}
 		],
 		"score": {
@@ -148,16 +143,6 @@
 					}
 				]
 			}
-		},
-		{
-			"type": "objectPlacer",
-			"objects": [
-				"assets/script/log_h.json",
-				"assets/script/log_w.json",
-				"assets/script/explosive_barrel.json",
-				"assets/script/snowman.json",
-				"assets/script/cannon.json"
-			]
 		},
 		{
 			"childData": "assets/script/log_w.json",

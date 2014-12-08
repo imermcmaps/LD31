@@ -3,7 +3,7 @@
 	"pixelToMeter": 200.0,
 	"gravity": [0, 2],
 	"debug": false,
-	"next": "assets/script/level_5.json",
+	"next": "assets/script/level_6.json",
 	"light": {
 		"enabled": true,
 		"ambient": [234, 245, 255]
