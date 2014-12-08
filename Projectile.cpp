@@ -8,6 +8,7 @@
 #include "Projectile.hpp"
 #include "Factory.hpp"
 #include "util/math.hpp"
+#include "Misc.hpp"
 Projectile::ContactHandler::ContactHandler(Projectile* projectile): m_projectile(projectile){
 	
 }
@@ -26,7 +27,7 @@ void Projectile::ContactHandler::handle(b2Contact* contact, bool begin) {
 		other = a;
 	}
 	if (projectile) {
-		if (projectile->IsExplode()){
+		if (projectile->IsExplode() && other->GetIdentifier() != "shockwave"){
 			projectile->SetExplode(true);
 		}
 	}
@@ -50,25 +51,7 @@ void Projectile::OnUpdate(sf::Time interval){
 	if (m_explode){
 		m_doesExplode = m_explode = false;
 		auto gpos = GetGlobalPosition();
-		engine::SpriteNode* explosion = static_cast<engine::SpriteNode*> (engine::Factory::CreateChildFromFile("assets/script/explosion.json", GetScene()));
-		explosion->setScale(GetSize().x * 20 / explosion->GetSize().x, GetSize().x * 20 / explosion->GetSize().x);
-		explosion->setPosition(gpos);
-		explosion->GetAnimation()->OnOver = [explosion]() {
-			explosion->Delete();
-		};
-		Json::Value ep;
-		if (engine::Factory::LoadJson("assets/script/shockwave_particle.json", ep)){
-			const float power = 5;
-			for (uint32_t i=0; i<20; i++){
-				float angle = (i/20.0) * 360.0 * engine::util::fPI/180.0;
-				b2Vec2 rayDir( sinf(angle), cosf(angle) );
-				Node* particle = engine::Factory::CreateChild(ep, explosion);
-				explosion->AddNode(particle);
-				particle->SetPosition(gpos.x, gpos.y);
-				particle->GetBody()->SetLinearVelocity(power*rayDir);
-				
-			}
-		}
+		CreateExplosion(GetScene(), 2, GetGlobalPosition(), 5);
 		GetBody()->SetActive(false);
 		Delete();
 	}

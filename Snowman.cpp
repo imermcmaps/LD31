@@ -12,7 +12,7 @@
 #include "util/Random.hpp"
 
 Snowman::BodyPart::BodyPart(engine::Scene* scene) : Damageable(scene), m_dead(false) {
-	m_health = 1;
+	m_health = 1.5;
 }
 
 void Snowman::BodyPart::Damage(float damage, Node* by, const b2WorldManifold& manifold) {

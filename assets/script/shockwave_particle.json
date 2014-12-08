@@ -1,19 +1,20 @@
 {
+	"identifier": "shockwave",
 	"body": {
 		"linearDampening": 100,
 		"fixedRotation": true,
 		"bullet": true,
 		"gravityScale": 0,
 		"shapes": [
-				{
-					"type": "circle",
-					"radius": 2,
-					"density": 100,
-					"friction": 0,
-					"restitution": 0.99,
-					"category": 8,
-					"mask": 8
-				}
+			{
+				"type": "circle",
+				"radius": 2,
+				"density": 1000,
+				"friction": 0,
+				"restitution": 0.99,
+				"category": 8,
+				"mask": 8
+			}
 		]
 	}
 }

@@ -1,0 +1,10 @@
+{
+	"type": "projectile",
+	"size": [24, 12],
+	"origin": "center",
+	"position": [25, 25],
+	"sprite": {
+		"sheet": "assets/script/sheet_projectiles.json",
+		"index": 1
+	}
+}

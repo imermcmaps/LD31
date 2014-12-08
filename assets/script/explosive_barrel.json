@@ -1,6 +1,6 @@
 {
 	"type": "explosive",
-	"size": [16, 26],
+	"size": [32, 52],
 	"origin": "center",
 	"explode": true,
 	"sprite": {
@@ -10,7 +10,7 @@
 		"bullet": true,
 		"shapes":[
 			{
-				"type":"box", "width":18, "height":12, "density": 1000
+				"type":"box", "width":30, "height":50, "density": 1
 			}
 		]
 	}

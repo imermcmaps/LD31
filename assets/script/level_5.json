@@ -56,12 +56,12 @@
 			{
 				"projectile": "assets/script/cannon_ball.json",
 				"icon": "assets/script/icon_cannon_ball.json",
-				"count": 10
+				"count": 7
 			},
 			{
 				"projectile": "assets/script/missile.json",
-				"icon": "assets/script/icon_cannon_ball.json",
-				"count": 5
+				"icon": "assets/script/icon_missile.json",
+				"count": 1
 			}
 		],
 		"score": {
@@ -82,9 +82,24 @@
 				"sheet": {
 					"texture": "assets/images/buttons.png",
 					"sprites": [
-						{ "left":0, "top":0, "width":44, "height":20},
-						{ "left":0, "top":20, "width":44, "height":20},
-						{ "left":0, "top":40, "width":44, "height":20}
+						{
+							"left": 0,
+							"top": 0,
+							"width": 44,
+							"height": 20
+						},
+						{
+							"left": 0,
+							"top": 20,
+							"width": 44,
+							"height": 20
+						},
+						{
+							"left": 0,
+							"top": 40,
+							"width": 44,
+							"height": 20
+						}
 					]
 				},
 				"animations": {
@@ -139,9 +154,356 @@
 			"objects": [
 				"assets/script/log_h.json",
 				"assets/script/log_w.json",
+				"assets/script/explosive_barrel.json",
 				"assets/script/snowman.json",
 				"assets/script/cannon.json"
 			]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [10, 287]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [50.0000114440918, 287]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [21.00000381469727, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [61, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [11, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [101.0000076293945, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [141, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [181, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [221, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [261, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [301, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [341, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [381, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [420.9999694824219, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [461, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [500.9999389648438, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [541, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [581, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [621, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [661, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [701, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [741, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [781, 510]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [820, 510]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [849.0001831054688, 498.9998474121094]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [849, 459.9999084472656]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [849, 419.9999694824219]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [849, 381]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [849, 341]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [849, 301]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [849, 261]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [849, 221]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [849, 181]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [849, 141]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [849, 101]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [849, 61]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [840.0005493164063, 28.0000057220459],
+			"rotation": -30
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [816, 3.000006198883057],
+			"rotation": -60
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [394, 285]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [83, 296],
+			"rotation": -60
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [107.0000076293945, 320],
+			"rotation": -30
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [116.9999923706055, 353]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [399, 250],
+			"rotation": 15
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [416, 221],
+			"rotation": 45
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [444.9999694824219, 203],
+			"rotation": 75
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [482.0000305175781, 198],
+			"rotation": 90
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [522, 198]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [562, 198]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [602, 198]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [642, 198]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [682, 198]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [722, 198]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [762, 198]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [802.0000610351563, 198]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [819.9998779296875, 198]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [196, 486],
+			"rotation": -75
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [215.0000152587891, 462],
+			"rotation": -30
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [248, 453.0000610351563]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [281, 462],
+			"rotation": 30
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [300, 486],
+			"rotation": 75
+		},
+		{
+			"childData": "assets/script/cannon.json",
+			"position": [234, 444]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [706, 482.0000305175781]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [706, 442]
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [695, 413],
+			"rotation": -45
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [666, 396],
+			"rotation": 105
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [637, 379],
+			"rotation": -45
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [615, 350],
+			"rotation": 150
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [475.9999389648438, 172],
+			"rotation": 15
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [489, 141],
+			"rotation": 30
+		},
+		{
+			"childData": "assets/script/log_h.json",
+			"position": [512, 117.9999923706055],
+			"rotation": 60
+		},
+		{
+			"childData": "assets/script/snowman.json",
+			"position": [772, 187]
+		},
+		{
+			"childData": "assets/script/snowman.json",
+			"position": [769, 499]
+		},
+		{
+			"childData": "assets/script/snowman.json",
+			"position": [27, 499],
+			"sprite": {
+				"flipped": true
+			}
+		},
+		{
+			"childData": "assets/script/snowman.json",
+			"position": [17, 276],
+			"sprite": {
+				"flipped": true
+			}
+		},
+		{
+			"childData": "assets/script/snowman.json",
+			"position": [552, 500]
+		},
+		{
+			"childData": "assets/script/snowman.json",
+			"position": [667, 188],
+			"sprite": {
+				"flipped": true
+			}
+		},
+		{
+			"childData": "assets/script/explosive_barrel.json",
+			"position": [524.0225830078125, 160.9998474121094]
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [541, 96],
+			"rotation": -45
+		},
+		{
+			"childData": "assets/script/log_w.json",
+			"position": [566, 89],
+			"rotation": 15
 		}
 
 	]
