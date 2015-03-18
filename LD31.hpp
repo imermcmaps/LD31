@@ -7,7 +7,8 @@
 
 #ifndef LD31_LD31_HPP
 #define	LD31_LD31_HPP
-#include "Game.hpp"
+#include "Engine/Game.hpp"
+#include "LevelScene.hpp"
 #include "LoadingScene.hpp"
 class LD31: public engine::Game {
 protected:

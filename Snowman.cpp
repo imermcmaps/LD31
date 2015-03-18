@@ -6,10 +6,10 @@
  */
 
 #include "Snowman.hpp"
-#include "Factory.hpp"
+#include "Engine/Factory.hpp"
 #include "Constants.hpp"
 #include "LevelScene.hpp"
-#include "util/Random.hpp"
+#include "Engine/util/Random.hpp"
 
 Snowman::BodyPart::BodyPart(engine::Scene* scene) : Damageable(scene), m_dead(false) {
 	m_health = 1.5;

@@ -7,9 +7,9 @@
 
 #ifndef SNOWMAN_HPP
 #define	SNOWMAN_HPP
-#include <SpriteNode.hpp>
+#include <Engine/SpriteNode.hpp>
 #include "Constants.hpp"
-#include <util/Event.hpp>
+#include <Engine/util/Event.hpp>
 #include "Damageable.hpp"
 class Snowman : public engine::Node {
 public:

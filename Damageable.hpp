@@ -1,7 +1,7 @@
 #ifndef LD31_DAMAGEABLE_HPP
 #define	LD31_DAMAGEABLE_HPP
 
-#include <SpriteNode.hpp>
+#include <Engine/SpriteNode.hpp>
 
 class Damageable : public engine::SpriteNode {
 public:

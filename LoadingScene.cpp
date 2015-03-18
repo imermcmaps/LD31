@@ -7,9 +7,9 @@
 
 #include "LoadingScene.hpp"
 #include "Cannon.hpp"
-#include "Factory.hpp"
+#include "Engine/Factory.hpp"
 #include "LevelScene.hpp"
-#include <Game.hpp>
+#include <Engine/Game.hpp>
 
 LoadingScene::LoadingScene(engine::Game* game) : Scene(game), m_delete(false){
 }

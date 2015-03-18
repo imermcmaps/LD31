@@ -6,8 +6,8 @@
  */
 
 #include "Projectile.hpp"
-#include "Factory.hpp"
-#include "util/math.hpp"
+#include "Engine/Factory.hpp"
+#include "Engine/util/math.hpp"
 #include "Misc.hpp"
 Projectile::ContactHandler::ContactHandler(Projectile* projectile): m_projectile(projectile){
 	

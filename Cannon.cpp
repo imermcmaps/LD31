@@ -6,17 +6,17 @@
  */
 
 #include "Cannon.hpp"
-#include "Scene.hpp"
-#include "Game.hpp"
-#include "util/math.hpp"
-#include "util/misc.hpp"
-#include "Factory.hpp"
+#include "Engine/Scene.hpp"
+#include "Engine/Game.hpp"
+#include "Engine/util/math.hpp"
+#include "Engine/util/misc.hpp"
+#include "Engine/Factory.hpp"
 #include <iostream>
 #include "Projectile.hpp"
 #include "Ui.hpp"
 #include "Constants.hpp"
 #include "LevelScene.hpp"
-#include "util/Random.hpp"
+#include "Engine/util/Random.hpp"
 
 Cannon::KeyHandler::KeyHandler(Cannon* cannon) : m_cannon(cannon) {
 

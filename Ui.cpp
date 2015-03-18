@@ -6,11 +6,11 @@
  */
 
 #include "Ui.hpp"
-#include "Scene.hpp"
+#include "Engine/Scene.hpp"
 #include "Constants.hpp"
-#include "Factory.hpp"
+#include "Engine/Factory.hpp"
 #include "Cannon.hpp"
-#include "Text.hpp"
+#include "Engine/Text.hpp"
 #include "LevelScene.hpp"
 
 Ui::Slot::Slot(engine::Scene* scene) : SpriteNode(scene), m_selected(false), m_icon(nullptr), m_count(0){

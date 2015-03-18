@@ -7,7 +7,7 @@
 
 #ifndef LD31_CONSTANTS_HPP
 #define	LD31_CONSTANTS_HPP
-#include "Node.hpp"
+#include "Engine/Node.hpp"
 enum LD31_TYPES{
     NT_LEVELSCENE = engine::NT_END,
     NT_SNOWMAN,

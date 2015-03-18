@@ -8,8 +8,8 @@
 #ifndef LOADINGSCENE_HPP
 #define	LOADINGSCENE_HPP
 
-#include <Scene.hpp>
-#include <util/Event.hpp>
+#include <Engine/Scene.hpp>
+#include <Engine/util/Event.hpp>
 class LoadingScene : public engine::Scene {
 protected:
     Scene* m_old;

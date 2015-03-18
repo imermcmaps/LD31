@@ -8,7 +8,7 @@
 #ifndef LD31_PROJECTILE_HPP
 #define	LD31_PROJECTILE_HPP
 
-#include <SpriteNode.hpp>
+#include <Engine/SpriteNode.hpp>
 
 class Projectile : public engine::SpriteNode {
 public:

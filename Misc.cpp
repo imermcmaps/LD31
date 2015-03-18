@@ -1,5 +1,5 @@
 #include "Misc.hpp"
-#include <Factory.hpp>
+#include <Engine/Factory.hpp>
 engine::Node* CreateExplosion(engine::Scene* scene, float force, const sf::Vector2f& pos, float sizeScale,  uint8_t numParticles) {
 	engine::SpriteNode* explosion = static_cast<engine::SpriteNode*> (engine::Factory::CreateChildFromFile("assets/script/explosion.json", scene));
 	explosion->setScale(sizeScale, sizeScale);

@@ -7,8 +7,8 @@
 
 #ifndef LD31_CANNON_HPP
 #define	LD31_CANNON_HPP
-#include <SpriteNode.hpp>
-#include <util/Event.hpp>
+#include <Engine/SpriteNode.hpp>
+#include <Engine/util/Event.hpp>
 #include <SFML/Window.hpp>
 class Cannon : public engine::SpriteNode {
 

@@ -7,7 +7,7 @@
 
 #ifndef LD31_LEVELSCENE_HPP
 #define	LD31_LEVELSCENE_HPP
-#include "Scene.hpp"
+#include "Engine/Scene.hpp"
 #include "Snowman.hpp"
 #include "Ui.hpp"
 

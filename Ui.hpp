@@ -8,12 +8,12 @@
 #ifndef LD31_UI_HPP
 #define	LD31_UI_HPP
 #include <unordered_map>
-#include <Node.hpp>
-#include <Text.hpp>
-#include <Factory.hpp>
+#include <Engine/Node.hpp>
+#include <Engine/Text.hpp>
+#include <Engine/Factory.hpp>
 #include <sstream>
 #include "Cannon.hpp"
-#include <Button.hpp>
+#include <Engine/Button.hpp>
 
 class Ui : public engine::Node {
 public:

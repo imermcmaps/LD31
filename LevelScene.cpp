@@ -9,7 +9,7 @@
 #include "LD31.hpp"
 #include <iostream>
 #include "Constants.hpp"
-#include <Factory.hpp>
+#include <Engine/Factory.hpp>
 #include "Ui.hpp"
 
 LevelScene::LevelScene(engine::Game* game) : Scene(game), m_cannon(nullptr), m_score(0), m_ammoLeft(0), m_targetsLeft(0), m_restartTimer(0) {
