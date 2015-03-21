@@ -10,7 +10,7 @@ engine::Node* CreateExplosion(engine::Scene* scene, float force, const sf::Vecto
 	Json::Value ep;
 	if (engine::Factory::LoadJson("assets/script/shockwave_particle.json", ep)) {
 		for (uint32_t i = 0; i < numParticles; i++) {
-			float angle = (i / static_cast<float>(numParticles)) * 360.0 * engine::util::fPI / 180.0;
+			float angle = (i / static_cast<float>(numParticles)) * 360.0f * engine::util::fPI / 180.0f;
 			b2Vec2 rayDir(sinf(angle), cosf(angle));
 			engine::Node* particle = engine::Factory::CreateChild(ep, explosion);
 			explosion->AddNode(particle);

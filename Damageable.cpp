@@ -20,7 +20,7 @@ void Damageable::ContactHandler::handle(b2Contact* contact, const b2ContactImpul
 	}
 	if (damageable && other->GetIdentifier() != "particle") {
 		float force = 0;
-		for (uint32_t i = 0; i < impulse->count; i++) {
+		for (int32_t i = 0; i < impulse->count; i++) {
 			force += impulse->normalImpulses[i];
 		}
 		force /= damageable->GetBody()->GetMass();
